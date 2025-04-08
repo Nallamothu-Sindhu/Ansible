@@ -1,0 +1,17 @@
+---
+- name: installing nginx
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: nginx install
+      ansible.builtin.apt:
+        name: nginx
+        state: present
+
+    - name: checking the status
+      command: systemctl status nginx
+      register: nginx_status
+
+    - name: print the output
+      debug:
+        var: nginx_status 
